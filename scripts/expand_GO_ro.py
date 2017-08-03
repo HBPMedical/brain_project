@@ -14,7 +14,7 @@ import re # for searching for regular expressions
 
 # create file paths
 
-root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 evidence_fname1 = root_dir + 'processed/GO_EVIDENCE/Gene_to_GO_ALL_ev_ALL_genes_evidence.txt'
 

@@ -2,7 +2,7 @@
 
 from xml.etree.ElementTree import ElementTree
 import time
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 # initialise file variables
 tree_fname = root_dir + 'processed/MOUSE_TREES/MP_tree.txt'

@@ -22,7 +22,7 @@ import gzip
 ###########################################################
 #set directory paths
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 
 NCBI_gene_info_fname = root_dir + '/downloads/gene_info.gz'

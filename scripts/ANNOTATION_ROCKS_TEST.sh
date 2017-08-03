@@ -1,12 +1,4 @@
-
 #!/bin/bash
-#
-#$ -q all.q
-#$ -cwd
-#$ -j y
-#$ -b y
-#$ -V
-#$ -S /bin/bash
 
 export PATH=/share/apps/anaconda2/bin:$PATH
 

@@ -12,7 +12,7 @@ import time
 # Based on expand_phneo_mouse_v2.py, edited paths for automation August 1st.
 
 # create file path
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 # initialise infile variables
 path_fname = root_dir + 'processed/MOUSE_TREES/MP_paths.txt'

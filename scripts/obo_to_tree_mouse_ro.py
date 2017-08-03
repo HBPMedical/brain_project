@@ -4,7 +4,7 @@ from xml.etree.ElementTree import ElementTree, Element
 from re import split, findall
 import time
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 # initialise variables
 

@@ -14,7 +14,7 @@ import pandas as pd
 import collections
 
 ########################################################################
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 indir_path = root_dir + 'processed/HOMOLOGENE'
 # define infiles

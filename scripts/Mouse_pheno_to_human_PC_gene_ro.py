@@ -14,7 +14,7 @@ import time
 
 # create file paths
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 # create infile paths.
 

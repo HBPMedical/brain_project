@@ -26,7 +26,7 @@ from collections import defaultdict
 import time
 import gzip
 
-root_path = '/home/sbijch/ANNOTATION_AUTO/'
+root_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 dir_path = root_path + 'downloads'
 
 # output file paths.

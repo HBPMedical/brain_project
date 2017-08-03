@@ -14,7 +14,7 @@ import pandas as pd
 import collections
 import time
 
-root_path = '/home/sbijch/ANNOTATION_AUTO/'
+root_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 in_file1_fname = root_path + 'downloads/MGI_PhenoGenoMP.rpt'
 in_file2_fname = root_path + 'processed/MOUSE_ID_MAPPING/MGI_markerID_to_entrezID_ALL.txt'

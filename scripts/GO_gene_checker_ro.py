@@ -13,7 +13,7 @@ import re # for searching for regular expressions
 
 # create file paths
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 expand_dir_path = root_dir + 'processed/GO_EXPAND'
 

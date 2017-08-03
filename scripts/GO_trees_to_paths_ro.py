@@ -12,7 +12,7 @@ from xml.etree.ElementTree import ElementTree
 import time
 
 # set directory paths
-dir_path = '/home/sbijch/ANNOTATION_AUTO/'
+dir_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 tree_dir_path = dir_path + 'processed/GO_TREES'
 attr_dir_path = dir_path + 'processed/GO_ATTRIBUTES'

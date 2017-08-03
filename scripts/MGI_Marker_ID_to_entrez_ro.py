@@ -19,7 +19,7 @@ import gzip
 import collections
 import time
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO/'
+root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
 # infile paths.
 MGI_EntrezGene_fname = root_dir + 'downloads/MGI_EntrezGene.rpt'

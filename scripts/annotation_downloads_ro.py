@@ -10,7 +10,7 @@ import socket
 import ftplib # for importing data from an ftp site.
 import urllib # for importing data from a web site.
 
-dir_path = '/home/sbijch/ANNOTATION_AUTO/downloads'
+dir_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/downloads'
 
 # change directory to the path above
 os.chdir(dir_path)
