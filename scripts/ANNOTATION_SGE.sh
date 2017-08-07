@@ -47,7 +47,7 @@ cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 # mouse ID mapping
 
-python ./MGI_Marker_ID_to_entrez_ID_ro.py
+python ./MGI_Marker_ID_to_entrez_ro.py
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_ID_MAPPING
 
@@ -141,7 +141,7 @@ done
 # expand the mouse annotations.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./expand_pheno_mouse_auto_ro.py
+python ./expand_pheno_mouse_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_EXPAND
@@ -248,7 +248,7 @@ done
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 
-python ./Mouse_pheno_to_human_PC_gene_auto_ro.py
+python ./Mouse_pheno_to_human_PC_gene_ro.py
 
 # check that the mouse_to_human files exist
 
@@ -276,7 +276,7 @@ cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 # construct the evidence files:
 
-python ./human_gene2go_extract_v14_auto_ro.py
+python ./human_gene2go_extract_ro.py
 
 # check that the evidence files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EVIDENCE
@@ -298,7 +298,7 @@ done
 # Process the GO obo file to generate three ontology trees and their attribute files
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./GO_obo_to_tree_v26_auto_ro.py
+python ./GO_obo_to_tree_ro.py
 
 # check that the trees files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_TREES
@@ -336,7 +336,7 @@ done
 # Process GO trees files to create paths and update the attributes files.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./GO_trees_to_paths_JH_auto_ro.py
+python ./GO_trees_to_paths_ro.py
 
 #check that the paths files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_PATHS
@@ -376,7 +376,7 @@ done
 # expand the GO term to gene annotations.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./expand_GO_v12_auto_ro.py
+python ./expand_GO_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EXPAND
@@ -398,7 +398,7 @@ done
 # Make id:gene_set: parents file for each ontology
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./GO_gene_checker_v2_auto_ro.py
+python ./GO_gene_checker_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_GENE_CHECK
