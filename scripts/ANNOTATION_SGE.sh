@@ -1,26 +1,24 @@
 
 #!/bin/bash
-#
-#$ -q all.q
-#$ -cwd
-#$ -j y
-#$ -b y
 #$ -V
+#$ -q all.q
+#$ -l h_vmem=8G
+#$ -cwd
+#$ -o annotation_log
+#$ -e annotation_err
 #$ -S /bin/bash
 
 export PATH=/share/apps/anaconda2/bin:$PATH
 
 source activate py2-numpy-pandas
 
-echo "Process began at $(date)"
 
 # #################################################################
 #
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-echo running annotation_downloads_ro.py
-python annotation_downloads_ro.py
 
+python ./annotation_downloads_ro.py
 #################################################################
 
 # check that all of the downloaded files exist before proceeding.
@@ -48,8 +46,8 @@ done
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 # mouse ID mapping
-echo running MGI_Marker_ID_to_entrez_ID_ro.py
-python MGI_Marker_ID_to_entrez_ID_ro.py
+
+python ./MGI_Marker_ID_to_entrez_ID_ro.py
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_ID_MAPPING
 
@@ -73,8 +71,8 @@ done
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 #construct the evidence files:
-echo running Mouse_pheno_JH_ro.py
-python Mouse_pheno_JH_ro.py
+
+python ./Mouse_pheno_JH_ro.py
 
 
 # check that the evidence files exist
@@ -98,8 +96,8 @@ done
 # Extracting mouse phenotype ontology to tree
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running obo_to_tree_mouse_ro.py
-python obo_to_tree_mouse_ro.py
+
+python ./obo_to_tree_mouse_ro.py
 
 # check that the tree files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TREES
@@ -120,8 +118,8 @@ done
 ################################################################################
 # Process mouse trees files to create paths and update the attributes files.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running obo_tree_to_paths_JH2ro.py
-python obo_tree_to_paths_JH2ro.py
+
+python ./obo_tree_to_paths_JH2_ro.py
 
 # check that the path and updated attributes files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TREES
@@ -142,8 +140,8 @@ done
 ################################################################################
 # expand the mouse annotations.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running expand_pheno_mouse_auto_ro.py
-python expand_pheno_mouse_auto_ro.py
+
+python ./expand_pheno_mouse_auto_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_EXPAND
@@ -168,7 +166,7 @@ echo "MOUSE_PHENO Processing complete at $(date)"
 ##########################################################################
 # Process the homolgene data
 
-echo "Processing homologene data at $(date)"
+
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/downloads
 
 # extract mouse and human data as two separate files:
@@ -199,8 +197,8 @@ done
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 #
-echo running homologene_gene_set_extractor_ro.py
-python homologene_gene_set_extractor_ro.py
+
+python ./homologene_gene_set_extractor_ro.py
 
 # check that the human and mouse NCBI gene files exist
 
@@ -224,8 +222,7 @@ done
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-echo running homologene_merge_auto_ro.py
-python homologene_merge_auto_ro.py
+python ./homologene_merge_auto_ro.py
 
 # check that the homologene_merge files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE
@@ -250,8 +247,8 @@ done
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-echo running  Mouse_pheno_to_human_PC_gene_auto_ro.py
-python Mouse_pheno_to_human_PC_gene_auto_ro.py
+
+python ./Mouse_pheno_to_human_PC_gene_auto_ro.py
 
 # check that the mouse_to_human files exist
 
@@ -278,8 +275,8 @@ echo "homologene processing complete at $(date)"
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
 # construct the evidence files:
-echo running human_gene2go_extract_v14_auto_ro.py
-python human_gene2go_extract_v14_auto_ro.py
+
+python ./human_gene2go_extract_v14_auto_ro.py
 
 # check that the evidence files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EVIDENCE
@@ -300,8 +297,8 @@ done
 ###############################################################################
 # Process the GO obo file to generate three ontology trees and their attribute files
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running GO_obo_to_tree_v26_auto_ro.py
-python GO_obo_to_tree_v26_auto_ro.py
+
+python ./GO_obo_to_tree_v26_auto_ro.py
 
 # check that the trees files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_TREES
@@ -338,8 +335,8 @@ done
 ###############################################################################
 # Process GO trees files to create paths and update the attributes files.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running  GO_trees_to_paths_JH_auto_ro.py
-python GO_trees_to_paths_JH_auto_ro.py
+
+python ./GO_trees_to_paths_JH_auto_ro.py
 
 #check that the paths files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_PATHS
@@ -378,8 +375,8 @@ done
 ###############################################################################
 # expand the GO term to gene annotations.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running expand_GO_v12_auto_ro.py
-python expand_GO_v12_auto_ro.py
+
+python ./expand_GO_v12_auto_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EXPAND
@@ -400,8 +397,8 @@ done
 ################################################################################
 # Make id:gene_set: parents file for each ontology
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-echo running GO_gene_checker_v2_auto_ro.py
-python GO_gene_checker_v2_auto_ro.py
+
+python ./GO_gene_checker_v2_auto_ro.py
 
 # check that the final output files 'expand.txt' exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_GENE_CHECK
@@ -420,4 +417,4 @@ do
 done
 
 # ################################################################################
-echo " Processing complete at $(date)"
+echo "Processing complete at $(date)"
