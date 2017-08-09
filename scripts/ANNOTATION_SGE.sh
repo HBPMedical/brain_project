@@ -2,7 +2,7 @@
 #!/bin/bash
 #$ -V
 #$ -q all.q
-#$ -l h_vmem=8G
+#$ -l h_vmem=40G
 #$ -cwd
 #$ -o annotation_log
 #$ -e annotation_err
