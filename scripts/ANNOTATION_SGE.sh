@@ -119,7 +119,7 @@ done
 # Process mouse trees files to create paths and update the attributes files.
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./obo_tree_to_paths_JH2_ro.py
+python ./obo_tree_to_paths_ro.py
 
 # check that the path and updated attributes files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TREES
