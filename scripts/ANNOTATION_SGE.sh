@@ -4,8 +4,8 @@
 #$ -q all.q
 #$ -l h_vmem=40G
 #$ -cwd
-#$ -o annotation_log
-#$ -e annotation_err
+#$ -o annotation2_log
+#$ -e annotation2_err
 #$ -S /bin/bash
 
 export PATH=/share/apps/anaconda2/bin:$PATH
@@ -222,13 +222,13 @@ done
 
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
 
-python ./homologene_merge_auto_ro.py
+python ./homologene_merge_ro.py
 
 # check that the homologene_merge files exist
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE
 
-homologene_merge_files=(hm_many_to_many_homol_ALL.txt	hm_one_to_many_homol_ALL.txt hm_many_to_many_homol_PC.txt	hm_one_to_many_homol_PC.txt hm_many_to_one_homol_ALL.txt \
-hm_one_to_one_homol_ALL.txt hm_many_to_one_homol_PC.txt	hm_one_to_one_homol_PC.txt)
+homologene_merge_files=(hm_one_to_one_homol_ALL.txt hm_one_to_many_homol_ALL.txt hm_many_to_many_homol_ALL.txt  hm_many_to_one_homol_ALL.txt hm_one_to_one_homol_PC.txt hm_one_to_many_homol_PC.txt  hm_many_to_one_homol_PC.txt hm_many_to_one_homol_PC.txt hm_many_to_many_homol_PC.txt)
+
 
 for file in ${homologene_merge_files[*]}
 do
