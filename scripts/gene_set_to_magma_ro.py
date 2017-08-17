@@ -39,9 +39,6 @@ outfile_type2 = 'MAGMA_10-200.txt'
 ##########################################
 # Main process
 
-count1 = 0
-count2 = 0
-
 # generate the output file name from the input file name
 
 for infilename in os.listdir(in_dir_path):
@@ -73,7 +70,8 @@ for infilename in os.listdir(in_dir_path):
 ##########################################
 
         for line in open(in_fname,'r'):
-            # print line
+            count1 = 0
+            count2 = 0
             # make each line into a list
             records = line.strip().split('\t')
             if len(records) < 4:
@@ -90,7 +88,7 @@ for infilename in os.listdir(in_dir_path):
                 gene_output2 = records[2].replace('|','\t')
                 outfile2.write(records[0] + '\t' + gene_output2 + '\n')
 
-        print 'total number of gene sets in', os.path.basename(in_fname),'=', count1
-        print 'number of gene sets with 10-200 genes in', os.path.basename(in_fname),'=', count2
+    print 'total number of gene sets in', os.path.basename(in_fname),'=', count1
+    print 'number of gene sets with 10-200 genes in', os.path.basename(in_fname),'=', count2
 
 print 'end of processing'
