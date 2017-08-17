@@ -159,6 +159,7 @@ do
   fi
 done
 
+
 ###############################################################################
 echo "MOUSE_PHENO Processing complete at $(date)"
 
@@ -266,6 +267,8 @@ do
     exit 1
   fi
 done
+
+cp MGI_single_gene_Pheno_to_human_protein_coding_gene.txt  > /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 echo "homologene processing complete at $(date)"
 ################################################################################
@@ -394,6 +397,9 @@ do
   fi
 done
 
+cat *.txt > GO_expand.txt
+cp GO_expand.txt > /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+
 ################################################################################
 # Make id:gene_set: parents file for each ontology
 cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
@@ -416,5 +422,12 @@ do
   fi
 done
 
-# ################################################################################
+#################################################################################
+# make gene set files in magma format for GO and MGI 'expand' files.
+
+cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+
+python ./gene_set_to_magma_ro.py
+
+#################################################################################
 echo "Processing complete at $(date)"

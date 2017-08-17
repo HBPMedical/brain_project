@@ -8,6 +8,7 @@ import time
 # derived from Mouse_pheno_to_human_gene_v2.py
 # Modified for automation July 27th 2017.
 # Modified again  automation July 28th 2017.
+# Modified again  automation August 17th 2017, to remove any mouse phneotypes without human homologues.
 
 
 # To map the genes in the mouse phenotypes derived using single gene manipulations to human PROTEIN CODING genes.
@@ -94,14 +95,14 @@ for line in open(f_name2,'r'):
             hu_gene_sym_list.append(homol_data[2])
 
     # check that there is at least one human homologue by checking that the list is not empty, before making output file.
-
-    #convert the human gene id and gene symbol lists to strings
-    hu_symbol_str = '|'.join(hu_gene_id_list)
-    hu_gene_str  = '|'.join(hu_gene_sym_list)
-    # check output format: human
-    # print '\n',lines[0], lines[1],hu_symbol_str,hu_gene_str
-    # Make output file , format  = MP ID: pheno name:  human genes: human symbols.
-    outfile.write(lines[0] + '\t' + lines[1]  + '\t' + hu_symbol_str + '\t' +  hu_gene_str + '\n')
+    if hu_gene_id_list :
+        #convert the human gene id and gene symbol lists to strings
+        hu_symbol_str = '|'.join(hu_gene_id_list)
+        hu_gene_str  = '|'.join(hu_gene_sym_list)
+        # check output format: human
+        # print '\n',lines[0], lines[1],hu_symbol_str,hu_gene_str
+        # Make output file , format  = MP ID: pheno name:  human genes: human symbols.
+        outfile.write(lines[0] + '\t' + lines[1]  + '\t' + hu_symbol_str + '\t' +  hu_gene_str + '\n')
 
 
 log_file.write('process complete at:   ' + time.strftime("%Y-%m-%d %H:%M") + '\n')
