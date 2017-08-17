@@ -268,7 +268,7 @@ do
   fi
 done
 
-cp MGI_single_gene_Pheno_to_human_protein_coding_gene.txt  > /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+cp MGI_single_gene_Pheno_to_human_protein_coding_gene.txt  /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 echo "homologene processing complete at $(date)"
 ################################################################################
@@ -398,7 +398,7 @@ do
 done
 
 cat *.txt > GO_expand.txt
-cp GO_expand.txt > /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+cp GO_expand.txt /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 ################################################################################
 # Make id:gene_set: parents file for each ontology
