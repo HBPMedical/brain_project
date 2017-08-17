@@ -18,7 +18,7 @@ import re
 
 # create file paths
 
-root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA'
+root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/'
 
 in_dir_path = root_dir + 'DATA_IN'
 
