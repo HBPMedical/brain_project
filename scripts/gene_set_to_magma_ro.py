@@ -22,7 +22,7 @@ root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/'
 
 in_dir_path = root_dir + 'DATA_IN'
 
-out_dir_path = root_dir + 'GENE_SETS'
+out_dir_path = root_dir + 'GENE_SETS_MAGMA'
 
 outfile_type1 = 'MAGMA_ALL.txt'
 outfile_type2 = 'MAGMA_10-200.txt'
