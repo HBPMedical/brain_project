@@ -20,21 +20,16 @@ import re
 
 root_dir = root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/'
 
+# for laptop testing
+#root_dir = root_dir = '/Users/Janetlaptop/Documents/HUMAN_BRAIN_PROJECT/ANNOTATION_AUTO_ROCKS/processed/MAGMA/'
+
+
 in_dir_path = root_dir + 'DATA_IN'
 
 out_dir_path = root_dir + 'GENE_SETS_MAGMA'
 
 outfile_type1 = 'MAGMA_ALL.txt'
 outfile_type2 = 'MAGMA_10-200.txt'
-
-# out_fname1 = root_dir + 'GO_MAGMA/GO_MAGMA_ALL.txt'
-# out_fname2 = root_dir + 'GO_MAGMA/GO_MAGMA_10-200.txt'
-
-########################################
-
-# open output file
-# outfile1 = open(out_fname1, 'w')
-# outfile2 = open(out_fname2, 'w')
 
 ##########################################
 # Main process
@@ -43,7 +38,8 @@ outfile_type2 = 'MAGMA_10-200.txt'
 
 for infilename in os.listdir(in_dir_path):
     if infilename.endswith(".txt"):
-
+        count1 = 0
+        count2 = 0
         print 'processing infile =', infilename
         #log_file.write('processing infile=' + infilename + '\n')
 
@@ -70,8 +66,6 @@ for infilename in os.listdir(in_dir_path):
 ##########################################
 
         for line in open(in_fname,'r'):
-            count1 = 0
-            count2 = 0
             # make each line into a list
             records = line.strip().split('\t')
             if len(records) < 4:
@@ -88,7 +82,7 @@ for infilename in os.listdir(in_dir_path):
                 gene_output2 = records[2].replace('|','\t')
                 outfile2.write(records[0] + '\t' + gene_output2 + '\n')
 
-    print 'total number of gene sets in', os.path.basename(in_fname),'=', count1
-    print 'number of gene sets with 10-200 genes in', os.path.basename(in_fname),'=', count2
+        print 'total number of gene sets in', os.path.basename(in_fname),'=', count1
+        print 'number of gene sets with 10-200 genes in', os.path.basename(in_fname),'=', count2
 
 print 'end of processing'
