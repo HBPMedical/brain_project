@@ -1,9 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red255\green39\blue18;
-\red102\green177\blue50;\red134\green205\blue77;\red0\green68\blue254;\red163\green217\blue121;}
-{\*\expandedcolortbl;;\csgray\c0;\csgray\c100000;\csgenericrgb\c100000\c15294\c7059;
-\csgenericrgb\c40000\c69412\c19608;\csgenericrgb\c52549\c80392\c30196;\csgenericrgb\c0\c26667\c99608;\csgenericrgb\c63922\c85098\c47451;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\csgray\c0;\csgray\c100000;\csgenericrgb\c0\c0\c0;
+}
 \paperw11900\paperh16840\margl1440\margr1440\vieww17300\viewh17260\viewkind0
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
@@ -17,59 +17,56 @@
 \f1\b\fs24 \cf0 \cb1 \CocoaLigature1 MOUSE
 \f0\b0\fs22 \cf2 \cb3 \CocoaLigature0      \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf2 \cb3 \
-\cf4 2. MGI_Marker_ID_to_entrez_ro.py\
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf4 \cb3 2. MGI_Marker_ID_to_entrez_ro.py Needs 12GB memory\
 \
-\cf2 3. \cf5 Mouse_pheno_JH_ro.py took 40 mins on rocks\cf2 \
+3. Mouse_pheno_JH_ro.py took 40 mins on rocks\
 \
-4. \cf6 obo_to_tree_mouse_ro.py\cf2 \
+4. obo_to_tree_mouse_ro.py\
 \
-5. \cf6 obo_tree_to_paths_ro.py\cf2 \
+5. obo_tree_to_paths_ro.py\
 \
-6. \cf6 expand_pheno_mouse_ro.py \cf2 \
+6. expand_pheno_mouse_ro.py \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b\fs24 \cf0 \cb1 \CocoaLigature1 HOMOLOGENE
-\f0\b0\fs22 \cf2 \cb3 \CocoaLigature0 \
+\f1\b\fs24 \cf4 \cb1 \CocoaLigature1 HOMOLOGENE
+\f0\b0\fs22 \cb3 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf2 \cb3 \
-7. \cf5 homologene_gene_set_extractor_ro.py \cf2 \
+\cf4 \cb3 \
+7. homologene_gene_set_extractor_ro.py \
 \
-8. \cf6 homologene_merge_ro.py\cf2 \
+8. homologene_merge_ro.py\
 \
-9. \cf6 Mouse_pheno_to_human_PC_gene_ro.py\cf2 \
+9. Mouse_pheno_to_human_PC_gene_ro.py\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf2 \cb3 \
+
+\f1\b\fs24 \cf4 \cb3 GO
+\f0\b0\fs22 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf2 \cb3 \
-10. \cf6 human_gene2go_extract_ro.py\cf7  took an 60 mins on rocks\cf2 \
+\cf4 \cb3 \
+10. human_gene2go_extract_ro.py \
 \
-11. \cf8 GO_obo_to_tree_ro.py \cf2 \
+11. GO_obo_to_tree_ro.py \
 \
-12. \cf6 GO_trees_to_paths_ro.py \cf2 \
+12. GO_trees_to_paths_ro.py \
 \
-13\cf5 . expand_GO_ro.py took 16 mins on rocks 8GB memory\cf2 \
+13. expand_GO_ro.py took 16 mins on rocks 8GB memory\
 \
-14. \cf6 GO_gene_checker_ro.py \cf2  \
+14. GO_gene_checker_ro.py  \cf2 \cb3 \
+\
+15. gene_set_to_magma_ro.py\
 \
 \
-\
-Shell scripts.\
-               \
-ANNOTATION_ROCKS_TEST.sh                    \
+Job script.\
+                              \
 ANNOTATION_SGE.sh                        \
                                           \
 \
-Red means problems: memory??? Ask MARK about this.\
 \
 \
-BLACK: not tested\
-\
-BLUE: running\
-\
-GREEN: ran O.K.\
 \
 \
 \
