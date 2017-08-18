@@ -27,7 +27,7 @@ f_name2 = root_dir + 'processed/MOUSE_EXPAND/MGI_single_gene_Pheno_protein_codin
 log_fname = root_dir + 'logs/mouse_to_human_genes.log'
 
 # define outfilepath
-out_fname = root_dir + 'processed/MOUSE_TO_HUMAN_GENES/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
+out_fname = root_dir + 'processed/MAGMA/DATA_IN/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
 
 # open output file
 outfile = open(out_fname, 'w')

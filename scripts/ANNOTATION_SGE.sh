@@ -253,7 +253,7 @@ python ./Mouse_pheno_to_human_PC_gene_ro.py
 
 # check that the mouse_to_human files exist
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TO_HUMAN_GENES
+cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 mouse_pheno_to_human_gene_files=(MGI_single_gene_Pheno_to_human_protein_coding_gene.txt)
 
@@ -267,8 +267,6 @@ do
     exit 1
   fi
 done
-
-cp MGI_single_gene_Pheno_to_human_protein_coding_gene.txt  /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 echo "homologene processing complete at $(date)"
 ################################################################################
@@ -398,7 +396,7 @@ do
 done
 
 cat *.txt > GO_expand.txt
-cp GO_expand.txt /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+mv GO_expand.txt /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
 
 ################################################################################
 # Make id:gene_set: parents file for each ontology
