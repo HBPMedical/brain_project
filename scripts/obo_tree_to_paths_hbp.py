@@ -2,17 +2,24 @@
 
 from xml.etree.ElementTree import ElementTree
 import time
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+import os
+
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 # initialise file variables
-tree_fname = root_dir + 'processed/MOUSE_TREES/MP_tree.txt'
-attr_fname = root_dir + 'processed/MOUSE_TREES/MP_attr.txt'
+tree_fname = root_dir + '/processed/MP_TREES/MP_tree.txt'
+attr_fname = root_dir + '/processed/MP_TREES/MP_attr.txt'
 
-path_fname = root_dir + 'processed/MOUSE_TREES/MP_paths.txt'
-attr_level_fname = root_dir + 'processed/MOUSE_TREES/MP_attr_level.txt'
+path_fname = root_dir + '/processed/MP_TREES/MP_paths.txt'
+attr_level_fname = root_dir + '/processed/MP_TREES/MP_attr_level.txt'
 
-log_fname = root_dir + 'logs/obo_tree_to_paths_log.txt'
-
+log_fname = root_dir + '/logs/mouse_obo_tree_to_paths_log.txt'
 
 ####################
 # read in attributes

@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+
+# Written by Janet Harwood September 12th.
+# checked September 13th, all O.K.
+# to convert genes set file into Magma format
+# NOTE: Line format = pheno_ID tab space delimited gene list
+
+import sys
+import os
+import re
+###############################################
+
+# create file paths
+
+# get the curent working directory
+cwd = os.getcwd()
+
+# set the root directory
+root_dir = os.path.split(cwd)[0]
+
+in_dir_path = root_dir + '/processed/MAGMA/DATA_IN'
+
+out_dir_path = root_dir + '/processed/MAGMA/GENE_SETS_MAGMA'
+
+outfile_type = '20-2000_MAGMA.txt'
+
+##########################################
+# Main process
+
+# generate the output file name from the input file name
+
+for infilename in os.listdir(in_dir_path):
+    count = 0
+    if infilename.endswith(".txt"):
+
+        print 'processing infile =', infilename
+        #log_file.write('processing infile=' + infilename + '\n')
+
+        in_fname = os.path.join(in_dir_path, infilename)
+
+        #  make outfile names from the infile name.
+        f_info = re.split('_|\.', infilename, 3)
+        #print f_info
+        prefix = '_'.join([f_info[0], f_info[1], f_info[2]])
+        #print prefix
+        outfilename = "_".join([prefix, outfile_type])
+        print 'outfile =', outfilename
+
+        out_fname = os.path.join(out_dir_path, outfilename)
+
+        # open outfile
+        outfile = open(out_fname, 'w')
+
+##########################################
+
+        for line in open(in_fname,'r'):
+            # make each line into a list
+            record = line.strip().split('\t')
+            if len(record) < 4:
+                sys.exit('some records have missing data')
+            else:
+                genes = record[2].split('|')
+                if (20 <= len(genes) <= 2000):
+                    gene_output = ' '.join(genes)
+                    count += 1
+                    outfile.write(record[0] + '\t' + gene_output + '\n' )
+
+
+        print 'number of gene sets with 20-2000 genes in', os.path.basename(in_fname),'=', count
+
+print 'end of processing'
+
+##########################################

@@ -3,16 +3,23 @@
 from xml.etree.ElementTree import ElementTree, Element
 from re import split, findall
 import time
+import os
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 # initialise variables
 
-ontology_fname = root_dir + 'downloads/MPheno_OBO.ontology'
-tree_fname = root_dir + 'processed/MOUSE_TREES/MP_tree.txt'
-attr_fname = root_dir + 'processed/MOUSE_TREES/MP_attr.txt'
+ontology_fname = root_dir + '/downloads/MPheno_OBO.ontology'
+tree_fname = root_dir + '/processed/MP_TREES/MP_tree.txt'
+attr_fname = root_dir + '/processed/MP_TREES/MP_attr.txt'
 
-log_fname = root_dir + 'logs/obo_to_tree_log.txt'
+log_fname = root_dir + '/logs/mouse_obo_to_tree_log.txt'
 
 elem_type = 'term' #name of elements to be extracted
 attr_list = ['id','name','alt_id','def','is_a'] #list of element attributes

@@ -1,29 +1,44 @@
+#!/bin/sh
 
-#!/bin/bash
-#$ -V
-#$ -q all.q
-#$ -l h_vmem=40G
-#$ -cwd
-#$ -o annotation2_log
-#$ -e annotation2_err
-#$ -S /bin/bash
+# activate numpy pandas environment
 
-export PATH=/share/apps/anaconda2/bin:$PATH
+source activate py27-numpy-pandas
 
-source activate py2-numpy-pandas
+# create directories.
+root_dir=$(pwd)
 
+mkdir processed
+mkdir logs
+mkdir downloads
 
-# #################################################################
-#
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd processed
 
+# create sub directories.
 
-python ./annotation_downloads_ro.py
+sub_dir_list=(GO_ANNOTATIONS GO_ATTRIBUTES GO_ATTRIBUTES_UPDATED \
+GO_EVIDENCE GO_PATHS GO_TREES HOMOLOGENE MAGMA MP_ANNOTATIONS \
+MP_EVIDENCE MP_ID_MAPPING MP_TO_HUMAN_GENES MP_TREES)
+
+for subdir in ${sub_dir_list[*]}
+do
+    mkdir $subdir
+done
+
+cd MAGMA
+
+mkdir DATA_IN
+mkdir GENE_SETS_MAGMA
+
+# ##################################################################
+
+cd $root_dir/scripts
+
+python ./annotation_downloads_hbp.py
 #################################################################
 
 # check that all of the downloaded files exist before proceeding.
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/downloads
+cd $root_dir/downloads
 
 files=(MGI_EntrezGene.rpt  gene_info.gz MGI_PhenoGenoMP.rpt gene2go.gz homologene.data MPheno_OBO.ontology go-basic.obo)
 
@@ -43,13 +58,13 @@ done
 
 # process mouse annotations
 # cd to the directory containing all the scripts to process the data.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-# mouse ID mapping
+# MP ID mapping
 
-python ./MGI_Marker_ID_to_entrez_ro.py
+python ./MGI_Marker_ID_to_entrez_hbp.py
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_ID_MAPPING
+cd $root_dir/processed/MP_ID_MAPPING
 
 # check that the output files exist
 ID_mapping_files=(MGI_markerID_to_entrezID_ALL.txt	MGI_markerID_to_entrezID_pc.txt)
@@ -68,15 +83,14 @@ done
 
 ################################################################################
 # cd to the directory containing all the scripts to process the data.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
 #construct the evidence files:
 
-python ./Mouse_pheno_JH_ro.py
-
+python ./Mouse_pheno_JH_hbp.py
 
 # check that the evidence files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_EVIDENCE
+cd $root_dir/processed/MP_EVIDENCE
 
 evidence_files=(MGI_PhenoGeno_single_gene_ALL.txt	MGI_PhenoGeno_single_protein_coding_gene.txt)
 
@@ -95,12 +109,12 @@ done
 #################################################################################
 # Extracting mouse phenotype ontology to tree
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./obo_to_tree_mouse_ro.py
+python ./obo_to_tree_mouse_hbp.py
 
 # check that the tree files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TREES
+cd $root_dir/processed/MP_TREES
 
 mouse_trees_files=(MP_tree.txt MP_attr.txt)
 
@@ -117,12 +131,12 @@ done
 
 ################################################################################
 # Process mouse trees files to create paths and update the attributes files.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./obo_tree_to_paths_ro.py
+python ./obo_tree_to_paths_hbp.py
 
 # check that the path and updated attributes files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_TREES
+cd $root_dir/processed/MP_TREES
 
 mouse_paths_files=(MP_paths.txt MP_attr_level.txt)
 
@@ -137,14 +151,14 @@ do
   fi
 done
 
-################################################################################
+###############################################################################
 # expand the mouse annotations.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./expand_pheno_mouse_ro.py
+python ./expand_pheno_mouse_hbp.py
 
 # check that the final output files 'expand.txt' exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MOUSE_EXPAND
+cd $root_dir/processed/MP_ANNOTATIONS
 
 mouse_expand_files=(MGI_single_gene_Pheno_protein_coding_annotation.txt)
 
@@ -159,25 +173,22 @@ do
   fi
 done
 
-
 ###############################################################################
-echo "MOUSE_PHENO Processing complete at $(date)"
+echo "MP_PHENO Processing complete at $(date)"
 
-##########################################################################
-##########################################################################
-# Process the homolgene data
-
-
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/downloads
+#########################################################################
+#########################################################################
+# Process the homologene data
+cd $root_dir/downloads
 
 # extract mouse and human data as two separate files:
 
-awk '$2 == "9606" {print $0 > "/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE/human_homologene_jh.txt" }' homologene.data
+awk '$2 == "9606" {print $0  }' homologene.data > $root_dir/processed/HOMOLOGENE/human_homologene_jh.txt
 
-awk '$2 == "10090" {print $0 > "/home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE/mouse_homologene_jh.txt" }' homologene.data
+awk '$2 == "10090" {print $0  }' homologene.data > $root_dir/processed/HOMOLOGENE/mouse_homologene_jh.txt
 
 # check that the homologene_cut files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE
+cd $root_dir/processed/HOMOLOGENE
 
 cut_files=(human_homologene_jh.txt mouse_homologene_jh.txt )
 
@@ -196,14 +207,13 @@ done
 
 # extract human and mouse gene information from the NCBI gene file and make homologene gene sets
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
-#
+cd $root_dir/scripts
 
-python ./homologene_gene_set_extractor_ro.py
+python ./homologene_gene_set_extractor_hbp.py
 
 # check that the human and mouse NCBI gene files exist
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE
+cd $root_dir/processed/HOMOLOGENE
 
 homologene_gene_sets=(homologene_human_protein_coding.txt homologene_mouse_protein_coding.txt homologene_human_all_minus_pseudo.txt homologene_mouse_all_minus_pseudo.txt)
 
@@ -218,18 +228,17 @@ do
   fi
 done
 
-############################################################################
-# extract the one-to-one, one-to many etc relationships between the human and mouse homologene gene sets.
+###########################################################################
+extract the one-to-one, one-to many etc relationships between the human and mouse homologene gene sets.
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./homologene_merge_ro.py
+python ./homologene_merge_hbp.py
 
 # check that the homologene_merge files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/HOMOLOGENE
+cd $root_dir/processed/HOMOLOGENE
 
 homologene_merge_files=(hm_one_to_one_homol_ALL.txt hm_one_to_many_homol_ALL.txt hm_many_to_many_homol_ALL.txt  hm_many_to_one_homol_ALL.txt hm_one_to_one_homol_PC.txt hm_one_to_many_homol_PC.txt  hm_many_to_one_homol_PC.txt hm_many_to_one_homol_PC.txt hm_many_to_many_homol_PC.txt)
-
 
 for file in ${homologene_merge_files[*]}
 do
@@ -242,18 +251,16 @@ do
   fi
 done
 
-#############################################################################
-
+############################################################################
 # Extract human homologues of mouse genes from phenotypes with single gene manipulations.
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-
-python ./Mouse_pheno_to_human_PC_gene_ro.py
+python ./Mouse_pheno_to_human_PC_gene_hbp.py
 
 # check that the mouse_to_human files exist
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+cd $root_dir/processed/MAGMA/DATA_IN
 
 mouse_pheno_to_human_gene_files=(MGI_single_gene_Pheno_to_human_protein_coding_gene.txt)
 
@@ -273,14 +280,14 @@ echo "homologene processing complete at $(date)"
 ################################################################################
 # Process GO ontology.
 # cd to the directory containing all the scripts to process the data.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
 # construct the evidence files:
 
-python ./human_gene2go_extract_ro.py
+python ./human_gene2go_extract_hbp.py
 
 # check that the evidence files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EVIDENCE
+cd $root_dir/processed/GO_EVIDENCE
 
 evidence_files=(Gene_to_GO_ALL_ev_ALL_genes_evidence.txt Gene_to_GO_ALL_ev_PC_genes_evidence.txt Gene_to_GO_STRICT_ev_ALL_genes_evidence.txt Gene_to_GO_STRICT_ev_PC_genes_evidence.txt )
 
@@ -297,12 +304,12 @@ done
 
 ###############################################################################
 # Process the GO obo file to generate three ontology trees and their attribute files
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./GO_obo_to_tree_ro.py
+python ./GO_obo_to_tree_hbp.py
 
 # check that the trees files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_TREES
+cd $root_dir/processed/GO_TREES
 
 trees_files=(BP_tree.txt CC_tree.txt MF_tree.txt)
 
@@ -318,7 +325,7 @@ do
 done
 
 #check that the attributes files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_ATTRIBUTES
+cd $root_dir/processed/GO_ATTRIBUTES
 
 attr_files=(BP_attr.txt	CC_attr.txt	MF_attr.txt)
 
@@ -335,12 +342,12 @@ done
 
 ###############################################################################
 # Process GO trees files to create paths and update the attributes files.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./GO_trees_to_paths_ro.py
+python ./GO_trees_to_paths_hbp.py
 
 #check that the paths files exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_PATHS
+cd $root_dir/processed/GO_PATHS
 
 paths_files=(BP_paths.txt CC_paths.txt MF_paths.txt)
 
@@ -355,10 +362,9 @@ do
   fi
 done
 
-
 # check that the updated attributes files exist
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_ATTRIBUTES_UPDATED
+cd $root_dir/processed/GO_ATTRIBUTES_UPDATED
 
 attr_level_files=(BP_attr_level.txt CC_attr_level.txt MF_attr_level.txt)
 
@@ -375,14 +381,14 @@ done
 
 ###############################################################################
 # expand the GO term to gene annotations.
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./expand_GO_ro.py
+python ./expand_GO2_hbp.py
 
 # check that the final output files 'expand.txt' exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_EXPAND
+cd $root_dir/processed/GO_ANNOTATIONS
 
-GO_expand_files=(BP_expand.txt CC_expand.txt MF_expand.txt)
+GO_expand_files=(BP_ALL_PC_expand.txt CC_ALL_PC_expand.txt MF_ALL_PC_expand.txt BP_STRICT_PC_expand.txt CC_STRICT_PC_expand.txt MF_STRICT_PC_expand.txt)
 
 for file in ${GO_expand_files[*]}
 do
@@ -395,37 +401,33 @@ do
   fi
 done
 
-cat *.txt > GO_expand.txt
-mv GO_expand.txt /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/MAGMA/DATA_IN
+# concatenate the GO ontology files together to make gene sets
 
-################################################################################
-# Make id:gene_set: parents file for each ontology
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cat BP_ALL_PC_expand.txt CC_ALL_PC_expand.txt MF_ALL_PC_expand.txt > GO_ALL_PC_expand.txt
+cat BP_STRICT_PC_expand.txt CC_STRICT_PC_expand.txt MF_STRICT_PC_expand.txt > GO_STRICT_PC_expand.txt
 
-python ./GO_gene_checker_ro.py
+mv GO_ALL_PC_expand.txt $root_dir/processed/MAGMA/DATA_IN
+mv GO_STRICT_PC_expand.txt $root_dir/processed/MAGMA/DATA_IN
 
-# check that the final output files 'expand.txt' exist
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/processed/GO_GENE_CHECK
-
-GO_id_genes_parents_files=(BP_id_genes_parents.txt CC_id_genes_parents.txt MF_id_genes_parents.txt)
-
-for file in ${GO_id_genes_parents_files[*]}
-do
-  if [ -s $file ]
-  then
-    echo "$0: File '${file}' exists and is not empty."
-  else
-    echo "$0: File '${file}' does not exist or is empty."
-    exit 1
-  fi
-done
-
-#################################################################################
+##################################################################################
 # make gene set files in magma format for GO and MGI 'expand' files.
 
-cd /home/sbijch/ANNOTATION_AUTO_ROCKS/scripts
+cd $root_dir/scripts
 
-python ./gene_set_to_magma_ro.py
+python ./gene_sets_to_magma_HBP.py
 
 #################################################################################
+
+# remove the unwanted folders at the end of the process
+
+cd $root_dir/processed
+
+del_dir_list=(MP_ID_MAPPING GO_ATTRIBUTES	HOMOLOGENE	MP_TO_HUMAN_GENES GO_ATTRIBUTES_UPDATED
+GO_EVIDENCE	GO_PATHS MP_EVIDENCE )
+
+for dir in ${del_dir_list[*]}
+do
+     rm -r $dir
+done
+
 echo "Processing complete at $(date)"

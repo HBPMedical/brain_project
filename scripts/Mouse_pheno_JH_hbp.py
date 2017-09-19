@@ -1,10 +1,8 @@
 #!/usr/bin/python
-# Mouse_pheno_JH_v5.py
+# Mouse_pheno_JH_hbp.py
 # written by Janet Harwood  March 22nd 2017.
-# Edited to tidy up for automation on June 29th 2017.
 # Empty values in the lists are replaced with 'None'
 
-# April 18th 2017. This script takes a long time to run.. it processes many lines!
 
 import sys
 import os
@@ -14,16 +12,22 @@ import pandas as pd
 import collections
 import time
 
-root_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the curent working directory
+cwd = os.getcwd()
+#print 'current working directory is', cwd
 
-in_file1_fname = root_path + 'downloads/MGI_PhenoGenoMP.rpt'
-in_file2_fname = root_path + 'processed/MOUSE_ID_MAPPING/MGI_markerID_to_entrezID_ALL.txt'
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+#print 'root directory is', root_dir
+
+in_file1_fname = root_dir + '/downloads/MGI_PhenoGenoMP.rpt'
+in_file2_fname = root_dir + '/processed/MP_ID_MAPPING/MGI_markerID_to_entrezID_ALL.txt'
 
 # open output file paths.
-log_fname = root_path + 'logs/MGI_evidence_log.txt'
+log_fname = root_dir + '/logs/MGI_evidence_log.txt'
 
-MGI_PhenoGeno_ALL_fname = root_path + 'processed/MOUSE_EVIDENCE/MGI_PhenoGeno_single_gene_ALL.txt'
-MGI_PhenoGeno_PC_fname = root_path + 'processed/MOUSE_EVIDENCE/MGI_PhenoGeno_single_protein_coding_gene.txt'
+MGI_PhenoGeno_ALL_fname = root_dir + '/processed/MP_EVIDENCE/MGI_PhenoGeno_single_gene_ALL.txt'
+MGI_PhenoGeno_PC_fname = root_dir + '/processed/MP_EVIDENCE/MGI_PhenoGeno_single_protein_coding_gene.txt'
 
 # open log file for writing
 

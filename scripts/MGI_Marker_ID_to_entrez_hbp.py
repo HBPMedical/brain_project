@@ -19,17 +19,25 @@ import gzip
 import collections
 import time
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+################
+
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 # infile paths.
-MGI_EntrezGene_fname = root_dir + 'downloads/MGI_EntrezGene.rpt'
-NCBI_gene_info_fname = root_dir + 'downloads/gene_info.gz'
+MGI_EntrezGene_fname = root_dir + '/downloads/MGI_EntrezGene.rpt'
+NCBI_gene_info_fname = root_dir + '/downloads/gene_info.gz'
 
 # output file paths.
-log_fname = root_dir + 'logs/MGI_markerID_to_entrezID_log'
+log_fname = root_dir + '/logs/MGI_markerID_to_entrezID_log'
 
-markerID_to_entrezID_ALL_fname = root_dir + 'processed/MOUSE_ID_MAPPING/MGI_markerID_to_entrezID_ALL.txt'
-markerID_to_entrezID_pc_fname = root_dir + 'processed/MOUSE_ID_MAPPING/MGI_markerID_to_entrezID_pc.txt'
+markerID_to_entrezID_ALL_fname = root_dir + '/processed/MP_ID_MAPPING/MGI_markerID_to_entrezID_ALL.txt'
+markerID_to_entrezID_pc_fname = root_dir + '/processed/MP_ID_MAPPING/MGI_markerID_to_entrezID_pc.txt'
 
 #################
 

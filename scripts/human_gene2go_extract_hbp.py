@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
-# written by Janet Harwood  April 19th 2017, edited May31st and June 1st 2017.
-# Modified June 7th 2016 to be able to use different kinds of evidence codes.
+# written by Janet Harwood
 # this script extracts human data from the NCBI gene2go file.
 
 # headers for NCBI 'gene_info' file
@@ -9,35 +8,38 @@
 # description	type_of_gene	Symbol_from_nomenclature_authority	Full_name_from_nomenclature_authority
 # Nomenclature_status	Other_designations	Modification_date
 
-
 # Possible qualifiers are:
 # set(['NOT colocalizes_with', 'contributes_to', 'NOT contributes_to', '-', 'colocalizes_with', 'NOT'])
 # removed all negative qualifiers using a regex.
 # NOTE: blank values in the input file are '-', where all the values in a list are '-', they have been replaced with 'None' in the output file.
 # finished and checked.
 
-# July 18th, ran through pylint and corected.
-# Score still not very good! 4.80
-
 import sys
 import os
-import re # for searching for regular expresssions
+import re
 from collections import defaultdict
 import time
 import gzip
 
-root_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
-dir_path = root_path + 'downloads'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
+
+dir_path = root_dir + '/downloads'
 
 # output file paths.
 
-log_fname = root_path + 'logs/human_gene_2go_extract_log.txt'
+log_fname = root_dir + '/logs/human_gene_2go_extract_log.txt'
 
-GO_evidence_ALL_ALL_fname = root_path + 'processed/GO_EVIDENCE/Gene_to_GO_ALL_ev_ALL_genes_evidence.txt'
-GO_evidence_ALL_PC_fname = root_path + 'processed/GO_EVIDENCE/Gene_to_GO_ALL_ev_PC_genes_evidence.txt'
+GO_evidence_ALL_ALL_fname = root_dir + '/processed/GO_EVIDENCE/Gene_to_GO_ALL_ev_ALL_genes_evidence.txt'
+GO_evidence_ALL_PC_fname = root_dir + '/processed/GO_EVIDENCE/Gene_to_GO_ALL_ev_PC_genes_evidence.txt'
 
-GO_evidence_STRICT_ALL_fname = root_path + 'processed/GO_EVIDENCE/Gene_to_GO_STRICT_ev_ALL_genes_evidence.txt'
-GO_evidence_STRICT_PC_fname = root_path + 'processed/GO_EVIDENCE/Gene_to_GO_STRICT_ev_PC_genes_evidence.txt'
+GO_evidence_STRICT_ALL_fname = root_dir + '/processed/GO_EVIDENCE/Gene_to_GO_STRICT_ev_ALL_genes_evidence.txt'
+GO_evidence_STRICT_PC_fname = root_dir + '/processed/GO_EVIDENCE/Gene_to_GO_STRICT_ev_PC_genes_evidence.txt'
 
 #############################
 

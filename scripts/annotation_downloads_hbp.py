@@ -10,7 +10,15 @@ import socket
 import ftplib # for importing data from an ftp site.
 import urllib # for importing data from a web site.
 
-dir_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/downloads'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root = os.path.split(cwd)[0]
+# print 'root directory is', root
+
+dir_path = root + '/downloads'
 
 # change directory to the path above
 os.chdir(dir_path)
@@ -100,7 +108,7 @@ download(HOST_NCBI, DIRN_NCBI_2, homologene_info)
 print 'NCBI homologene_info download complete'
 
 download(HOST_GO, DIRN_GO, go_obo)
-print 'NCBI go_obo download complete'
+print 'GO go_obo download complete'
 
 print 'all files downloaded, process complete'
 

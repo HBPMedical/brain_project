@@ -5,29 +5,34 @@ import os
 import time
 
 # Written by Janet Harwood April 13th 2017.
+# To map the genes in the mouse phenotypes derived using single gene manipulations to human PROTEIN CODING genes.
 # derived from Mouse_pheno_to_human_gene_v2.py
 # Modified for automation July 27th 2017.
 # Modified again  automation July 28th 2017.
 # Modified again  automation August 17th 2017, to remove any mouse phneotypes without human homologues.
 
-
-# To map the genes in the mouse phenotypes derived using single gene manipulations to human PROTEIN CODING genes.
+#############################################################
 
 # create file paths
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 # create infile paths.
 
-f_name1 = root_dir + 'processed/HOMOLOGENE/hm_one_to_one_homol_PC.txt'
+f_name1 = root_dir + '/processed/HOMOLOGENE/hm_one_to_one_homol_PC.txt'
 
-f_name2 = root_dir + 'processed/MOUSE_EXPAND/MGI_single_gene_Pheno_protein_coding_annotation.txt'
+f_name2 = root_dir + '/processed/MP_ANNOTATIONS/MGI_single_gene_Pheno_protein_coding_annotation.txt'
 
 # define log file path
-log_fname = root_dir + 'logs/mouse_to_human_genes.log'
+log_fname = root_dir + '/logs/mouse_to_human_genes.log'
 
 # define outfilepath
-out_fname = root_dir + 'processed/MAGMA/DATA_IN/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
+out_fname = root_dir + '/processed/MAGMA/DATA_IN/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
 
 # open output file
 outfile = open(out_fname, 'w')

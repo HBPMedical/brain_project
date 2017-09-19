@@ -11,18 +11,23 @@ import time
 # Might want to re-write this script later to make both files: ALL and PROTEIN CODING in one script.
 # Based on expand_phneo_mouse_v2.py, edited paths for automation August 1st.
 
-# create file path
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
+
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 # initialise infile variables
-path_fname = root_dir + 'processed/MOUSE_TREES/MP_paths.txt'
-attr_fname = root_dir + 'processed/MOUSE_TREES/MP_attr.txt'
-evidence_fname = root_dir + 'processed/MOUSE_EVIDENCE/MGI_PhenoGeno_single_protein_coding_gene.txt'
+path_fname = root_dir + '/processed/MP_TREES/MP_paths.txt'
+attr_fname = root_dir + '/processed/MP_TREES/MP_attr.txt'
+evidence_fname = root_dir + '/processed/MP_EVIDENCE/MGI_PhenoGeno_single_protein_coding_gene.txt'
 
 # initialise outfile variables
-expand_fname = root_dir + 'processed/MOUSE_EXPAND/MGI_single_gene_Pheno_protein_coding_annotation.txt'
+expand_fname = root_dir + '/processed/MP_ANNOTATIONS/MGI_single_gene_Pheno_protein_coding_annotation.txt'
 
-log_fname = root_dir + 'logs/MP_expand_log.txt'
+log_fname = root_dir + '/logs/MP_expand_log.txt'
 
 #######################################################
 

@@ -12,13 +12,18 @@ from xml.etree.ElementTree import ElementTree
 import time
 
 # set directory paths
-dir_path = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
 
-tree_dir_path = dir_path + 'processed/GO_TREES'
-attr_dir_path = dir_path + 'processed/GO_ATTRIBUTES'
+# get the curent working directory
+cwd = os.getcwd()
 
-out_dir_path1 = dir_path + 'processed/GO_PATHS'
-out_dir_path2 = dir_path + 'processed/GO_ATTRIBUTES_UPDATED'
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+
+tree_dir_path = root_dir + '/processed/GO_TREES'
+attr_dir_path = root_dir + '/processed/GO_ATTRIBUTES'
+
+out_dir_path1 = root_dir + '/processed/GO_PATHS'
+out_dir_path2 = root_dir + '/processed/GO_ATTRIBUTES_UPDATED'
 
 # define infile type
 infile_type1 = 'attr.txt'
@@ -27,7 +32,7 @@ infile_type1 = 'attr.txt'
 outfile_type1 = 'paths.txt'
 outfile_type2 = 'attr_level.txt'
 
-log_fname = dir_path + 'logs/GO_obo_tree_to_paths.log'
+log_fname = root_dir + '/logs/GO_obo_tree_to_paths.log'
 
 # open log in append mode
 log_file = open(log_fname, 'a')

@@ -14,29 +14,35 @@ import pandas as pd
 import collections
 
 ########################################################################
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
 
-indir_path = root_dir + 'processed/HOMOLOGENE'
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
+
+indir_path = root_dir + '/processed/HOMOLOGENE'
 # define infiles
 
-infname_1 = root_dir + 'processed/HOMOLOGENE/homologene_human_all_minus_pseudo.txt'
-infname_2 = root_dir + 'processed/HOMOLOGENE/homologene_mouse_all_minus_pseudo.txt'
-infname_3 = root_dir + 'processed/HOMOLOGENE/homologene_human_protein_coding.txt'
-infname_4 = root_dir + 'processed/HOMOLOGENE/homologene_mouse_protein_coding.txt'
+infname_1 = root_dir + '/processed/HOMOLOGENE/homologene_human_all_minus_pseudo.txt'
+infname_2 = root_dir + '/processed/HOMOLOGENE/homologene_mouse_all_minus_pseudo.txt'
+infname_3 = root_dir + '/processed/HOMOLOGENE/homologene_human_protein_coding.txt'
+infname_4 = root_dir + '/processed/HOMOLOGENE/homologene_mouse_protein_coding.txt'
 
 # define log file
-log_fname = root_dir + 'logs/homologene_merge.log'
+log_fname = root_dir + '/logs/homologene_merge.log'
 
 # define outfiles
-out_fname1 = root_dir + 'processed/HOMOLOGENE/hm_one_to_one_homol_ALL.txt'
-out_fname2 = root_dir + 'processed/HOMOLOGENE/hm_one_to_many_homol_ALL.txt'
-out_fname3 = root_dir + 'processed/HOMOLOGENE/hm_many_to_one_homol_ALL.txt'
-out_fname4 = root_dir + 'processed/HOMOLOGENE/hm_many_to_many_homol_ALL.txt'
+out_fname1 = root_dir + '/processed/HOMOLOGENE/hm_one_to_one_homol_ALL.txt'
+out_fname2 = root_dir + '/processed/HOMOLOGENE/hm_one_to_many_homol_ALL.txt'
+out_fname3 = root_dir + '/processed/HOMOLOGENE/hm_many_to_one_homol_ALL.txt'
+out_fname4 = root_dir + '/processed/HOMOLOGENE/hm_many_to_many_homol_ALL.txt'
 
-out_fname5 = root_dir + 'processed/HOMOLOGENE/hm_one_to_one_homol_PC.txt'
-out_fname6 = root_dir + 'processed/HOMOLOGENE/hm_one_to_many_homol_PC.txt'
-out_fname7 = root_dir + 'processed/HOMOLOGENE/hm_many_to_one_homol_PC.txt'
-out_fname8 = root_dir + 'processed/HOMOLOGENE/hm_many_to_many_homol_PC.txt'
+out_fname5 = root_dir + '/processed/HOMOLOGENE/hm_one_to_one_homol_PC.txt'
+out_fname6 = root_dir + '/processed/HOMOLOGENE/hm_one_to_many_homol_PC.txt'
+out_fname7 = root_dir + '/processed/HOMOLOGENE/hm_many_to_one_homol_PC.txt'
+out_fname8 = root_dir + '/processed/HOMOLOGENE/hm_many_to_many_homol_PC.txt'
 
 
 #open output files

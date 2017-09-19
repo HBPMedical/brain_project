@@ -1,5 +1,6 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
-{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\fonttbl\f0\fnil\fcharset0 Verdana;\f1\fnil\fcharset0 Menlo-Regular;\f2\fswiss\fcharset0 Helvetica;
+}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue0;
 }
 {\*\expandedcolortbl;;\csgray\c0;\csgray\c100000;\csgenericrgb\c0\c0\c0;
@@ -7,21 +8,69 @@
 \paperw11900\paperh16840\margl1440\margr1440\vieww26360\viewh15540\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\b\fs24 \cf0 AUTOMATED ANNOTATION README
-\b0 \
+\f0\fs24 \cf0 \
+Written by Janet Harwood September 2017.\
 \
-Written by Janet Harwood August 18th 2017.\
-\
-The process is here:\
-\
- /home/sbijch/ANNOTATION_AUTO_ROCKS\
+The whole process is contained in the folder: ANNOTATION_AUTO_HBP\
 \
 This process runs using  the  
-\b \cf2 \cb3 \CocoaLigature0 Job script: ANNOTATION_SGE.sh 
-\b0 \cf0 \cb1 \CocoaLigature1 \
+\b \cf2 \cb3 \CocoaLigature0 shell script: ANNOTATION_HBP.sh \
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b Directories:
+\b0 \cf2 It can be run from any directory and it will generate all  directories and sub-directories required to run the process.\
+Some intermediate data generated during the process is deleted at the end of the process. This can be modified by commenting out the final section of the shell script.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \CocoaLigature1 The whole process takes about 2 hours to run and requires \cf4 \cb3 \CocoaLigature0 12GB memory.\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf4 Dependencies : Anaconda (
+\f1\b0\fs22 \cf2 version 4.3.16) 
+\f0\b\fs24 \cf4 and python 2.7.13\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 \cb1 \CocoaLigature1 Check whether Anaconda is  installed on your system by typing : conda --version\
+\
+Instructions for installing Anaconda on your system are here :  https://docs.anaconda.com/anaconda/install/\
+\
+To create an anaconda environment with numpy and pandas in it, specifying python 2.7, run the following command:\
+\
+conda create --name py27-numpy-pandas numpy pandas\
+\
+NOTE: you can use a different version of python, but if you do, you will need to change the version in the 
+\b \cf2 \cb3 \CocoaLigature0 ANNOTATION_HBP.sh
+\b0  script.\cf0 \cb1 \CocoaLigature1 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Python modules used in this process:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+sys\
+os\
+socket\
+ftplib\
+urllib\
+collections\
+time\
+re\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 itertools
+\f0 \
+
+\f2 xml.etree.ElementTree
+\f0 \
+gzip\
+pandas\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 Main Directories:
 \b0 \
 \
 1. scripts\
@@ -33,24 +82,14 @@ This process runs using  the
 \fs22 \cf2 \cb3 \CocoaLigature0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\fs24 \cf0 \cb1 \CocoaLigature1 \
-The whole process takes about 2 hours to run and the job script requests 40Gb of memory ( this could be reduced). \
-\
-The script  \cf4 \cb3 \CocoaLigature0 MGI_Marker_ID_to_entrez_ro.py needs 12GB memory, everything else needs less.\
-\
-The \cf0 \cb1 \CocoaLigature1 py27-numpy-pandas environment is required for this process. It is created in the job script.\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf4 \cb3 \CocoaLigature0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\b \cf4 \
+\b\fs24 \cf4 \
 #########################################################\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \fs28 \cf0 \cb1 \CocoaLigature1 1.  DOWNLOADS
 \fs24 \
 \
-Script: \cf2 \cb3 \CocoaLigature0 annotation_downloads_ro.py
+Script: \cf2 \cb3 \CocoaLigature0 annotation_downloads_hbp.py
 \b0 \cf0 \cb1 \CocoaLigature1 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \cb3 \CocoaLigature0 \
@@ -59,7 +98,9 @@ Script: \cf2 \cb3 \CocoaLigature0 annotation_downloads_ro.py
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \cb3 \CocoaLigature0 MGI_PhenoGenoMP.rpt\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \cb3 \CocoaLigature0 MGI_EntrezGene.rpt\
 \
 MPheno_OBO.ontology\
@@ -94,7 +135,7 @@ go-basic.obo
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b\fs24 \cf0 \cb1 \CocoaLigature1 Script:\cf4 \cb3 \CocoaLigature0  MGI_Marker_ID_to_entrez_ro.py\
+\b\fs24 \cf0 \cb1 \CocoaLigature1 Script:\cf4 \cb3 \CocoaLigature0  MGI_Marker_ID_to_entrez_hbp.py\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -106,13 +147,15 @@ go-basic.obo
 \b \cf0 \cb1 \CocoaLigature1 Input files:\cf4 \cb3 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf4 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b0 MGI_EntrezGene.rpt\
+\b0 \cf4 MGI_EntrezGene.rpt\
 gene_info.gz\
 \
 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b Out_file directory: /MOUSE_ID_MAPPING
+\b \cf4 Out_file directory: /MP_ID_MAPPING
 \b0 \
 \
 MGI_markerID_to_entrezID_ALL.txt : ALL genes\
@@ -128,18 +171,19 @@ MGI_markerID_to_entrezID_pc.txt. : protein coding genes only\
 \b0  MGI_marker_ID 	Type	GeneID	Symbol	Synonyms.  type_of_gene\cf4 \cb3 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf4 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b \
+\b \cf4 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 2.2  Constructing mouse \'91evidence \'91 files.\
 \
 Script:
 \b0\fs22 \cf2 \cb3 \CocoaLigature0  
-\b\fs24 \cf2 \cb3 Mouse_pheno_JH_ro.py\
+\b\fs24 Mouse_pheno_JH_hbp.py\
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b0 \cf4 \cb3 Maps mouse single gene phenotypes to NCBI \cf0 \cb1 \CocoaLigature1 entrez gene ID\cf4 \cb3 \CocoaLigature0  genes.\
+\b0 \cf4 Maps mouse single gene phenotypes to NCBI \cf0 \cb1 \CocoaLigature1 entrez gene ID\cf4 \cb3 \CocoaLigature0  genes.\
 \
 \pard\tx566\pardeftab720\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 Transgenes were removed and records were selected  that only have one gene manipulated per per phenotype.\
@@ -154,9 +198,9 @@ Script:
 
 \b \cf2 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf2 \cb3 \
+\cf2 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf4 \cb3 Out_file directory: MOUSE_EVIDENCE\
+\cf4 Out_file directory: MP_EVIDENCE\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -194,7 +238,7 @@ Script:
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 Script:  
-\b0 \cf4 \cb3 \CocoaLigature0 obo_to_tree_mouse_ro.py\
+\b0 \cf4 \cb3 \CocoaLigature0 obo_to_tree_mouse_hbp.py\
 \
 Constructs the ontology tree for mouse phenotypes.\cf2 \
 
@@ -209,7 +253,7 @@ input file:\
 \b0 \cf2 \cb3 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b \cf4 Out_file directory: /MOUSE_TREES\cf0 \cb1 \CocoaLigature1 \
+\b \cf4 Out_file directory: /MP_TREES\cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b0 \cf0 \
@@ -241,15 +285,16 @@ input file:\
 \b\fs24 \cf4 2.4 Constructing \cf0 \cb1 \CocoaLigature1 Mouse phenotype \cf4 \cb3 \CocoaLigature0 ontology paths.
 \b0\fs22 \
 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\fs24 Constructs ontology paths from the tree for mouse phenotypes.\
+\fs24 \cf4 Constructs ontology paths from the tree for mouse phenotypes.\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \fs22 \cf4 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \b\fs24 \cf0 \cb1 \CocoaLigature1 Script: 
-\b0\fs22 \cf4 \cb3 \CocoaLigature0 obo_tree_to_paths_ro.py\
+\b0\fs22 \cf4 \cb3 \CocoaLigature0 obo_tree_to_paths_hbp.py\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -264,7 +309,7 @@ MP_attr.txt
 \b \
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf4 \cb3 \CocoaLigature0 Out_file directory: /MOUSE_TREES\
+\cf4 \cb3 \CocoaLigature0 Out_file directory: /MP_TREES\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -303,7 +348,7 @@ MP_attr.txt
 
 \b \cf0 \cb1 \CocoaLigature1 Script:
 \b0 \cf4 \cb3 \CocoaLigature0  
-\b expand_pheno_mouse_ro.py \
+\b expand_pheno_mouse_hbp.py \
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
@@ -321,7 +366,7 @@ MGI_PhenoGeno_single_protein_coding_gene.txt
 \b \
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf4 \cb3 \CocoaLigature0 Out_file directory: /MOUSE_EXPAND\cf0 \cb1 \CocoaLigature1 \
+\cf4 \cb3 \CocoaLigature0 Out_file directory: /MP_ANNOTATIONS\cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \
 MGI_single_gene_Pheno_protein_coding_annotation.txt
@@ -386,7 +431,7 @@ HID (HomoloGene group id)   Taxonomy ID    Gene ID    Gene Symbol    Protein gi 
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b\fs24 \cf0 \cb1 \CocoaLigature1 Script:
-\b0 \cf4 \cb3 \CocoaLigature0  homologene_gene_set_extractor_ro.py \
+\b0 \cf4 \cb3 \CocoaLigature0  homologene_gene_set_extractor_hbp.py \
 \
 Creates file for each species of:\
 a) all genes minus pseudo genes\
@@ -433,7 +478,7 @@ homologene_mouse_protein_coding.txt\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \b \cf0 \cb1 \CocoaLigature1 Script:
-\b0 \cf4 \cb3 \CocoaLigature0  homologene_merge_ro.py\
+\b0 \cf4 \cb3 \CocoaLigature0  homologene_merge_hbp.py\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -487,7 +532,7 @@ Fields:
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b \cf0 \cb1 \CocoaLigature1 Script: 
-\b0 \cf4 \cb3 \CocoaLigature0  Mouse_pheno_to_human_PC_gene_ro.py\
+\b0 \cf4 \cb3 \CocoaLigature0  Mouse_pheno_to_human_PC_gene_hbp.py\
 
 \b \cf0 \cb1 \CocoaLigature1 \
 Input files: \
@@ -542,7 +587,7 @@ Fields:
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b \cf0 \cb1 \CocoaLigature1 Script: 
-\b0 \cf4 \cb3 \CocoaLigature0  human_gene2go_extract_ro.py \
+\b0 \cf4 \cb3 \CocoaLigature0  human_gene2go_extract_hbp.py \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf4 \
 This script extracts human data from the NCBI gene2go file. All negative qualifiers are removed:\
@@ -591,7 +636,7 @@ Fields:
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b\fs24 \cf0 \cb1 \CocoaLigature1 Script:
-\b0\fs22 \cf4 \cb3 \CocoaLigature0  GO_obo_to_tree_ro.py \
+\b0\fs22 \cf4 \cb3 \CocoaLigature0  GO_obo_to_tree_hbp.py \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf4 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -645,7 +690,7 @@ CC_attr.txt\
 \
 
 \b Script: \cf2 \cb3 \CocoaLigature0 GO_trees_to_paths_JH.py
-\b0 \cf2 \cb3 	
+\b0 	
 \b \cf0 \cb1 \CocoaLigature1 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -708,7 +753,7 @@ CC_attr_level.txt\
 \
 
 \fs24 Script:
-\b0  \cf4 \cb3 \CocoaLigature0 expand_GO_ro.py\cf2 	
+\b0  \cf4 \cb3 \CocoaLigature0 expand_GO_hbp.py\cf2 	
 \b \cf0 \cb1 \CocoaLigature1 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -731,7 +776,7 @@ Gene_to_GO_STRICT_ev_PC_genes_evidence.txt\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \b \cf4 \cb3 \CocoaLigature0 Out_file directory: /\cf0 \cb1 \CocoaLigature1  
-\b0 \cf2 \cb3 \CocoaLigature0 GO_EXPAND\cf0 \cb1 \CocoaLigature1 \
+\b0 \cf2 \cb3 \CocoaLigature0 GO_ANNOTATIONS\cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \
 BP_expand.txt\
@@ -761,67 +806,22 @@ This file is moved to the MAGMA directory for processing the gene sets into MAGM
 \b MAGMA/DATA_IN
 \b0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf4 \cb3 \CocoaLigature0 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf4 \
-
-\b 6.5 Generating list of GO term parents and gene sets.\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 \cb1 \CocoaLigature1 Script:
-\b0  \cf4 \cb3 \CocoaLigature0  GO_gene_checker_ro.py  \
-\
-Generates GO term, the list of genes associated with that term and the parents of the  GO term.\
-\
-Infiles:\
-\
-*paths.txt\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 \cb1 \CocoaLigature1 *attr.txt\
-*expand.txt\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-
-\b \cf4 \cb3 \CocoaLigature0 Out_file directory: /
-\b0 \cf2 GO_GENE_CHECK\cf0 \cb1 \CocoaLigature1 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 \
-Outfile names:\
-\
-BP_id_genes_parents.txt\
-MF_id_genes_parents.txt\cf4 \cb3 \CocoaLigature0 \
-\cf0 \cb1 \CocoaLigature1 CC_id_genes_parents.txt\cf4 \cb3 \CocoaLigature0 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf4 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\b \cf0 \cb1 \CocoaLigature1 Format: 
-\b0 tab delimited text, one line per GO_ID.\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf4 \cb3 \CocoaLigature0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\b \cf0 \cb1 \CocoaLigature1 Fields:
-\b0 \cf4 \cb3 \CocoaLigature0  GO term   \cf0 \cb1 \CocoaLigature1 entrez gene Id (pipe delimited)  \cf4 \cb3 \CocoaLigature0  parent_list\cf0 \cb1 \CocoaLigature1 (pipe delimited)\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \fs22 \cf4 \cb3 \CocoaLigature0 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b\fs24 \cf4 6.6 Converting gene sets to Magma format.
+\b\fs24 \cf4 6.5 Converting gene sets to Magma format.
 \b0\fs22 \cf2 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \fs24 \cf2 \
-\cf0 \cb1 \CocoaLigature1 Script:\cf2 \cb3 \CocoaLigature0  gene_set_to_magma_ro.py\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cb1 \CocoaLigature1 Script:\cf2 \cb3 \CocoaLigature0  gene_set_to_magma_hbp.py\
 \
-This script takes any \'91expand\'92 format file and converts it to a format suitable for analysis in Magma. \
+This script takes any \'91annotation\'92 format file and converts it to a format suitable for analysis in Magma. \
 The script generates the name of the output file from the name of the input file.\
-Two output files are generated:\
-\
-1. All genes sets \'91ALL.txt\'92\
-2. Gene sets containing 1\'96200 genes \'9210-200.txt\'92\
+output files are generated are gene sets containing 20\'962000 genes \
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
@@ -832,8 +832,7 @@ Two output files are generated:\
 \
 outfile names:\
 \
-*_MAGMA_ALL.txt\
-*_MAGMA_10-200.txt\
+*_MAGMA_20-200.txt\
 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -843,7 +842,7 @@ outfile names:\
 \
 
 \b \cf0 \cb1 \CocoaLigature1 Fields:  
-\b0 \cf2 \cb3 \CocoaLigature0 Gene set name  entrez gene ids.
+\b0 \cf2 \cb3 \CocoaLigature0 Gene set name <tab> entrez gene ids (gene ids are space delimited).
 \fs22 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \

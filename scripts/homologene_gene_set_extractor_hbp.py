@@ -22,23 +22,28 @@ import gzip
 ###########################################################
 #set directory paths
 
-root_dir = '/home/sbijch/ANNOTATION_AUTO_ROCKS/'
+# get the curent working directory
+cwd = os.getcwd()
+# print 'current working directory is', cwd
 
+# get the root directory
+root_dir = os.path.split(cwd)[0]
+# print 'root directory is', root_dir
 
 NCBI_gene_info_fname = root_dir + '/downloads/gene_info.gz'
 
-mouse_homologene_fname = root_dir + 'processed/HOMOLOGENE/mouse_homologene_jh.txt'
-human_homologene_fname = root_dir + 'processed/HOMOLOGENE/human_homologene_jh.txt'
+mouse_homologene_fname = root_dir + '/processed/HOMOLOGENE/mouse_homologene_jh.txt'
+human_homologene_fname = root_dir + '/processed/HOMOLOGENE/human_homologene_jh.txt'
 
 # outfile paths
 
-log_fname = root_dir + 'logs/homologene_gene_set_extractor_log.txt'
+log_fname = root_dir + '/logs/homologene_gene_set_extractor_log.txt'
 
-human_out_all_fname = root_dir + 'processed/HOMOLOGENE/homologene_human_all_minus_pseudo.txt'
-mouse_out_all_fname = root_dir + 'processed/HOMOLOGENE/homologene_mouse_all_minus_pseudo.txt'
+human_out_all_fname = root_dir + '/processed/HOMOLOGENE/homologene_human_all_minus_pseudo.txt'
+mouse_out_all_fname = root_dir + '/processed/HOMOLOGENE/homologene_mouse_all_minus_pseudo.txt'
 
-human_out_PC_fname = root_dir + 'processed/HOMOLOGENE/homologene_human_protein_coding.txt'
-mouse_out_PC_fname = root_dir + 'processed/HOMOLOGENE/homologene_mouse_protein_coding.txt'
+human_out_PC_fname = root_dir + '/processed/HOMOLOGENE/homologene_human_protein_coding.txt'
+mouse_out_PC_fname = root_dir + '/processed/HOMOLOGENE/homologene_mouse_protein_coding.txt'
 
 #######################################
 # open output files for writing
