@@ -83,7 +83,10 @@ for infilename in os.listdir(gene_set_path):
     # extract the subsets from the mouse pheno dictionary
     for ID in subset:
         if ID in mouse_pheno_dict.keys():
-            name = ' '.join([ID,mouse_pheno_dict[ID][0]])
+            name_text = '_'.join(mouse_pheno_dict[ID][0].split())
+            #print name_text
+            name = '_'.join([ID,name_text])
+            #print name
             genes = mouse_pheno_dict[ID][1].replace('|'," ")
             gene_list = genes.split()
             if len(gene_list) >=20:

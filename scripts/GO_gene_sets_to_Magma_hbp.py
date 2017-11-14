@@ -67,8 +67,6 @@ for infilename in os.listdir(in_dir_path):
             if len(record) < 4:
                 sys.exit('some records have missing data')
             else:
-                #name = ' '.join([record[0],record[1]])
-                #print name
                 name_text = '_'.join(record[1].split())
                 #print name_text
                 name = '_'.join([record[0],name_text])
@@ -77,7 +75,6 @@ for infilename in os.listdir(in_dir_path):
                     gene_output = ' '.join(genes)
                     count += 1
                     outfile.write(name + '\t' + gene_output + '\n' )
-
 
         print 'number of gene sets with 20-2000 genes in', os.path.basename(in_fname),'=', count
         log_file.write('number of gene sets with 20-2000 genes in'+ os.path.basename(in_fname) + '=' + str(count) + '\n')

@@ -20,7 +20,7 @@ cwd = os.getcwd()
 # set the root directory
 root_dir = os.path.split(cwd)[0]
 
-in_dir_path = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE'
+in_dir_path = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE/MOUSE'
 
 out_dir_path = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE/MOUSE/MOUSE_MAGMA_FORMAT'
 
@@ -69,20 +69,18 @@ for infilename in os.listdir(in_dir_path):
             if len(record) < 4:
                 sys.exit('some records have missing data')
             else:
-                #name = ' '.join([record[0],record[1]])
-                #print name
                 name_text = '_'.join(record[1].split())
                 #print name_text
                 name = '_'.join([record[0],name_text])
                 genes = record[2].split('|')
-                if (len(genes) >= 20):
+                if (20 <= len(genes) <= 2000):
                     gene_output = ' '.join(genes)
                     count += 1
                     outfile.write(name + '\t' + gene_output + '\n' )
 
 
         print 'number of gene sets with at least 20 genes in' , os.path.basename(in_fname),'=', count
-        log_file.write('number of gene sets with 20-2000 genes in' + os.path.basename(in_fname) + '=' + str(count)+ '\n')
+        log_file.write('number of gene sets at least 20 genes in' + os.path.basename(in_fname) + '=' + str(count)+ '\n')
 
 log_file.write('process complete at:   ' + time.strftime("%Y-%m-%d %H:%M") + '\n')
 print 'end of processing'
