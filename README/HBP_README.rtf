@@ -801,9 +801,7 @@ This file is moved to the MAGMA directory for processing the gene sets into MAGM
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b \cf4 \cb3 \CocoaLigature0 FINAL GO Out_file directory: /
-\b0 \cf0 \cb1 \CocoaLigature1  
-\b MAGMA/DATA_IN
+\b \cf4 \cb3 \CocoaLigature0 FINAL GO Out_file directory: /\cf0 \cb1 \CocoaLigature1 GENE_SETS/GO
 \b0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -817,7 +815,7 @@ This file is moved to the MAGMA directory for processing the gene sets into MAGM
 
 \fs24 \cf2 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 \cb1 \CocoaLigature1 Script:\cf2 \cb3 \CocoaLigature0  gene_set_to_magma_hbp.py\
+\cf0 \cb1 \CocoaLigature1 1.Script:\cf2 \cb3 \CocoaLigature0  GO_gene_set_to_magma_hbp.py\
 \
 This script takes any \'91annotation\'92 format file and converts it to a format suitable for analysis in Magma. \
 The script generates the name of the output file from the name of the input file.\
@@ -827,12 +825,12 @@ output files are generated are gene sets containing 20\'962000 genes \
 
 \b \cf4 Out_file directory:
 \b0 \cf2  
-\b MAGMA/ GENE_SETS_MAGMA
+\b  GENE_SETS/GO/GO_MAGMA_FORMAT
 \b0 \
 \
 outfile names:\
 \
-*_MAGMA_20-200.txt\
+*_MAGMA_20-2000.txt\
 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -847,9 +845,27 @@ outfile names:\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \
 \
+2. 
+\fs24 \cf0 \cb1 \CocoaLigature1 Script:\cf2 \cb3 \CocoaLigature0  MGI_gene_set_to_magma_hbp.py
+\fs22 \
 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs24 \cf2 This script takes any \'91annotation\'92 format file and converts it to a format suitable for analysis in Magma. \
+The script generates the name of the output file from the name of the input file.\
+output files are generated are gene sets containing 20 or more genes \
 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\b \cf4 Out_file directory:
+\b0 \cf2  
+\b  GENE_SETS/MAMMALIAN_PHENOTYPE/MOUSE/MOUSE_MAGMA_FORMAT
+\b0 \
 \
+outfile names:\
+\
+*_MAGMA_20.txt
+\fs22 \
 \
 \
   }

@@ -4,10 +4,12 @@
 # checked September 13th, all O.K.
 # to convert genes set file into Magma format
 # NOTE: Line format = pheno_ID tab space delimited gene list
+# edited November 13th 2017
 
 import sys
 import os
 import re
+import time
 ###############################################
 
 # create file paths
@@ -18,11 +20,17 @@ cwd = os.getcwd()
 # set the root directory
 root_dir = os.path.split(cwd)[0]
 
-in_dir_path = root_dir + '/processed/MAGMA/DATA_IN'
+in_dir_path = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE'
 
-out_dir_path = root_dir + '/processed/MAGMA/GENE_SETS_MAGMA'
+out_dir_path = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE/MOUSE/MOUSE_MAGMA_FORMAT'
 
-outfile_type = '20-2000_MAGMA.txt'
+outfile_type = 'pheno_to_human_20_MAGMA.txt'
+
+# define log file path
+log_fname = root_dir + '/logs/MGI_gene_sets_to_Magma.log'
+
+# open log file for writing
+log_file = open(log_fname, 'w')
 
 ##########################################
 # Main process
@@ -33,8 +41,8 @@ for infilename in os.listdir(in_dir_path):
     count = 0
     if infilename.endswith(".txt"):
 
-        print 'processing infile =', infilename
-        #log_file.write('processing infile=' + infilename + '\n')
+        print 'processing infile =' , infilename
+        log_file.write('processing infile =  ' + infilename + '\n')
 
         in_fname = os.path.join(in_dir_path, infilename)
 
@@ -45,6 +53,7 @@ for infilename in os.listdir(in_dir_path):
         #print prefix
         outfilename = "_".join([prefix, outfile_type])
         print 'outfile =', outfilename
+        log_file.write('outfile = ' + outfilename + '\n')
 
         out_fname = os.path.join(out_dir_path, outfilename)
 
@@ -56,18 +65,23 @@ for infilename in os.listdir(in_dir_path):
         for line in open(in_fname,'r'):
             # make each line into a list
             record = line.strip().split('\t')
+            #print record
             if len(record) < 4:
                 sys.exit('some records have missing data')
             else:
+                name = ' '.join([record[0],record[1]])
+                #print name
                 genes = record[2].split('|')
-                if (20 <= len(genes) <= 2000):
+                if (len(genes) >= 20):
                     gene_output = ' '.join(genes)
                     count += 1
-                    outfile.write(record[0] + '\t' + gene_output + '\n' )
+                    outfile.write(name + '\t' + gene_output + '\n' )
 
 
-        print 'number of gene sets with 20-2000 genes in', os.path.basename(in_fname),'=', count
+        print 'number of gene sets with at least 20 genes in' , os.path.basename(in_fname),'=', count
+        log_file.write('number of gene sets with 20-2000 genes in' + os.path.basename(in_fname) + '=' + str(count)+ '\n')
 
+log_file.write('process complete at:   ' + time.strftime("%Y-%m-%d %H:%M") + '\n')
 print 'end of processing'
 
 ##########################################

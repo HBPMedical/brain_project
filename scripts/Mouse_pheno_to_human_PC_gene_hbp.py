@@ -9,7 +9,8 @@ import time
 # derived from Mouse_pheno_to_human_gene_v2.py
 # Modified for automation July 27th 2017.
 # Modified again  automation July 28th 2017.
-# Modified again  automation August 17th 2017, to remove any mouse phneotypes without human homologues.
+# Modified again  automation August 17th 2017, to remove any mouse phenotypes without human homologues.
+# modified November 13th 2017
 
 #############################################################
 
@@ -32,7 +33,7 @@ f_name2 = root_dir + '/processed/MP_ANNOTATIONS/MGI_single_gene_Pheno_protein_co
 log_fname = root_dir + '/logs/mouse_to_human_genes.log'
 
 # define outfilepath
-out_fname = root_dir + '/processed/MAGMA/DATA_IN/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
+out_fname = root_dir + '/processed/GENE_SETS/MAMMALIAN_PHENOTYPE/MOUSE/MGI_single_gene_Pheno_to_human_protein_coding_gene.txt'
 
 # open output file
 outfile = open(out_fname, 'w')

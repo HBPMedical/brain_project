@@ -31,13 +31,13 @@ out_dir_path = root_dir + '/processed/GO_ANNOTATIONS'
 infile_type1 = 'attr.txt'
 
 # define outfile types
-outfile_type1 = 'ALL_PC_expand.txt'
-outfile_type2 = 'STRICT_PC_expand.txt'
-outfile_type3 = 'ALL_ALL_expand.txt'
-outfile_type4 = 'STRICT_ALL_expand.txt'
+outfile_type1 = 'ALL_PC.txt'
+outfile_type2 = 'STRICT_PC.txt'
+outfile_type3 = 'ALL_ALL.txt'
+outfile_type4 = 'STRICT_ALL.txt'
 
 # define log file
-log_fname = root_dir + '/logs/GO_expand.log'
+log_fname = root_dir + '/logs/expand_GO.log'
 
 # open log file for writing
 log_file = open(log_fname, 'w')
