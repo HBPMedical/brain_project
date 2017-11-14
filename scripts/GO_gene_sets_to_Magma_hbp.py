@@ -67,8 +67,11 @@ for infilename in os.listdir(in_dir_path):
             if len(record) < 4:
                 sys.exit('some records have missing data')
             else:
-                name = ' '.join([record[0],record[1]])
+                #name = ' '.join([record[0],record[1]])
                 #print name
+                name_text = '_'.join(record[1].split())
+                #print name_text
+                name = '_'.join([record[0],name_text])
                 genes = record[2].split('|')
                 if (20 <= len(genes) <= 2000):
                     gene_output = ' '.join(genes)
